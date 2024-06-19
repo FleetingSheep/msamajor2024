@@ -6,13 +6,16 @@ def highlight(x, y):
     global board
     print(f"X: {x}")
     print(f"Y: {y}")
+    x, y = get_coords(x, y)
+    
+
+def get_coords(x, y):
     x += 400
     y -= 400
     y *= -1
-    print(f"Coordinate X: {int(x / 100)}")
-    print(f"Coordinate Y: {int(y / 100)}")
-    print(board[(int(y / 100)), (int(x / 100))])
-
+    x /= 100
+    y /= 100
+    return x, y
 
 def place(board, side):
     counter = 0
@@ -50,6 +53,9 @@ def main():
 
     exist = True
     increment = wn.window_width() / 8
+    
+    turtle_coords = {}
+
     for ycounter, i in enumerate(board):
         for counter, i in enumerate(board):
             turtle = trtl.Turtle()
@@ -78,6 +84,7 @@ def main():
                 turtle.ht()
 
             if exist == True: #alternate pieces for checker-board pattern
+                turtle_coords = None
                 exist = False
                 
             else:
